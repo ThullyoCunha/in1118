@@ -3,10 +3,8 @@ package ClientPackage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.net.SocketAddress;
 
 public class Client implements Runnable{
 
@@ -26,15 +24,12 @@ public class Client implements Runnable{
 				socket.close();
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		// TODO Auto-generated method stub
 		
 	}
 	
 	public static void main(String[] args) {
 		new Client().run();
 	}
-
 }

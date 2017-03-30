@@ -1,24 +1,15 @@
 package ServerPackage;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Server implements Runnable {
 
 	private ServerSocket server;
-
-	private List<Attendant> attendants;
 
 	private boolean initialized;
 	private boolean running;
@@ -26,7 +17,6 @@ public class Server implements Runnable {
 
 	// Server method that will call the connection opening method.
 	public Server(int port) throws Exception {
-		attendants = new ArrayList<Attendant>();
 		initialized = false;
 		running = false;
 
@@ -42,18 +32,10 @@ public class Server implements Runnable {
 	// "close" method that will closed the socket connection.
 	private void close() {
 
-		for (Attendant attendant : attendants) {
-			try {
-				attendant.stop();
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-		}
-
 		try {
 			server.close();
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 
 		server = null;
@@ -62,7 +44,7 @@ public class Server implements Runnable {
 		thread = null;
 	}
 
-	// "start" method that will start the socket connection.
+	// "start" method that will start the thread.
 	public void start() {
 		if (!initialized || running) {
 			return;
@@ -73,7 +55,7 @@ public class Server implements Runnable {
 		thread.start();
 	}
 
-	// "stop" method that will stop the socket connection.
+	// "stop" method that will stop the thread.
 	public void stop() throws Exception {
 		if (!initialized || running) {
 			return;
@@ -102,7 +84,6 @@ public class Server implements Runnable {
 				try {
 					socket.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -131,5 +112,4 @@ public class Server implements Runnable {
 		new Server(3131).start();
 
 	}
-
 }
