@@ -1,4 +1,4 @@
-package ServerPackage;
+package server;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -84,7 +84,7 @@ public class Attendant implements Runnable{
 			try{
 				String message = in.readLine();
 				
-				System.out.println("Message received from client [" + socket.getInetAddress().getHostName() + ":" +
+				System.out.println("Message received from UDPClient [" + socket.getInetAddress().getHostName() + ":" +
 						socket.getPort() + "]: " + message);
 				
 				if("FIM".equals(message)){

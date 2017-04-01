@@ -1,13 +1,11 @@
-package ServerPackage;
+package server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import worker.AbstractSocketWorker;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server implements Runnable {
+public abstract class TCPServer implements Runnable {
 
 	private ServerSocket server;
 
@@ -15,8 +13,8 @@ public class Server implements Runnable {
 	private boolean running;
 	private Thread thread;
 
-	// Server method that will call the connection opening method.
-	public Server(int port) throws Exception {
+	// TCPServer method that will call the connection opening method.
+	public TCPServer(int port) throws Exception {
 		initialized = false;
 		running = false;
 
@@ -81,35 +79,22 @@ public class Server implements Runnable {
 				e.printStackTrace();
 				break;
 			}finally{
-				try {
-					socket.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+
 			}
 		}
 
 		close();
 	}
 
-	private void handleRequest(Socket socket) throws IOException {
-		BufferedReader streamReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		OutputStreamWriter streamWriter = new OutputStreamWriter(socket.getOutputStream());
-		String read;
-		while((read=streamReader.readLine())!=null){
-			System.out.println(read);
-			streamWriter.write(read.toUpperCase() + "\n");
-			streamWriter.flush();
-		}
-		streamWriter.close();
-		streamReader.close();
-		
-		
-	}
+	private void handleRequest(Socket socket) throws Exception {
 
-	public static void main(String[] args) throws Exception {
-
-		new Server(3131).start();
+		AbstractSocketWorker worker=buildWorker(socket);
+		worker.start();
 
 	}
+
+
+	public abstract AbstractSocketWorker buildWorker(Socket socket) throws Exception;
+
+
 }
