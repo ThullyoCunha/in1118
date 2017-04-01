@@ -81,7 +81,6 @@ public abstract class UDPServer implements Runnable{
 
             try {
                 System.out.println("Connection OK");
-                DatagramPacket packet = serverS.
                 handleRequest(serverS);
                 stop();
             } catch (Exception e) {

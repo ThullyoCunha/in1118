@@ -1,6 +1,5 @@
 package client;
 
-import com.sun.security.ntlm.Client;
 import rpc.Call;
 import rpc.CallInvoker;
 import rpc.CallResult;
