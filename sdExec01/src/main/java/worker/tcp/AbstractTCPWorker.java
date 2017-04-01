@@ -8,7 +8,7 @@ import java.net.Socket;
 /**
  * Created by tjamir on 30/03/17.
  */
-public abstract class AbstractTCPWorker extends AbstractWoker implements Runnable{
+public abstract class AbstractTCPWorker  implements Runnable, AbstractWoker{
 
     private Socket socket;
     private DataInputStream in;

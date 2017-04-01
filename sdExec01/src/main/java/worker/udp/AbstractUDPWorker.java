@@ -10,7 +10,7 @@ import java.net.InetAddress;
 /**
  * Created by tjamir on 30/03/17.
  */
-public abstract class AbstractUDPWorker extends AbstractWoker implements Runnable{
+public abstract class AbstractUDPWorker  implements Runnable, AbstractWoker{
 
     private DatagramSocket socket;
 
@@ -18,26 +18,7 @@ public abstract class AbstractUDPWorker extends AbstractWoker implements Runnabl
         this.socket = socket;
     }
 
-    @Override
-    public void open() throws Exception {
-
-    }
-
-    @Override
-    public void close() throws Exception {
-
-    }
-
-    @Override
-    public void start() {
-        new Thread(this).start();
-
-    }
-
-    @Override
-    public void stop() throws Exception {
-
-    }
+   
 
     @Override
     public void run() {
