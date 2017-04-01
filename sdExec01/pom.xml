@@ -21,6 +21,17 @@
             </plugin>
         </plugins>
     </build>
+    
+    <!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
+<dependencies>
+	<dependency>
+	    <groupId>com.rabbitmq</groupId>
+	    <artifactId>amqp-client</artifactId>
+	    <version>4.1.0</version>
+	</dependency>
+</dependencies>
+
+    
 
 
 </project>
