@@ -29,7 +29,7 @@ public class UDPClient{
 
             InetAddress IPAddress = InetAddress.getByName(server);
 
-            byte[] receiveData = new byte[1024];
+            byte[] receiveData = new byte[10240];
 
 
             DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);

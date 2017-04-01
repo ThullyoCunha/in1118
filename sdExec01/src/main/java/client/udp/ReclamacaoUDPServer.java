@@ -1,5 +1,6 @@
 package client.udp;
 
+import client.KindOfTransport;
 import reclamacoes.IReclamacoes;
 import reclamacoes.ReclamacoesImpl;
 import rpc.ServiceHandler;
@@ -28,7 +29,7 @@ public class ReclamacaoUDPServer extends UDPServer {
 
     public void init() throws IOException {
         ReclamacoesImpl reclamacoes = new ReclamacoesImpl();
-        reclamacoes.init();
+        reclamacoes.init(KindOfTransport.UDP);
         serviceHandler = new ServiceHandler<>(reclamacoes, IReclamacoes.class);
         this.start();
 

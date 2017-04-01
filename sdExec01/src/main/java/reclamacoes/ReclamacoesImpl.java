@@ -1,5 +1,6 @@
 package reclamacoes;
 
+import client.KindOfTransport;
 import client.tcp.StorageClient;
 import storageservice.ConsistencyException;
 import storageservice.StorageService;
@@ -15,10 +16,9 @@ public class ReclamacoesImpl implements IReclamacoes {
 
     private StorageService storageService;
 
-    public void init() throws IOException {
+    public void init(KindOfTransport kindOfTransport) throws IOException {
         BufferedReader inFromUser=new BufferedReader(new InputStreamReader(System.in));
-        StorageClient client=new StorageClient();
-        client.init();
+        StorageService client=new StorageServiceFactory(kindOfTransport).getStorageService();
         storageService=client;
 
     }
@@ -26,7 +26,6 @@ public class ReclamacoesImpl implements IReclamacoes {
     @Override
     public Reclamacao reclamar(String texto) throws IOException, ConsistencyException {
         Reclamacao reclamacao=new Reclamacao(texto, System.currentTimeMillis());
-
         storageService.storePair(Long.toString(reclamacao.getTimestamp()), serialize(reclamacao));
         return reclamacao;
 

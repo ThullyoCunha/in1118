@@ -1,5 +1,6 @@
 package client.tcp;
 
+import client.KindOfTransport;
 import reclamacoes.IReclamacoes;
 import reclamacoes.ReclamacoesImpl;
 import rpc.ServiceHandler;
@@ -23,7 +24,7 @@ public class ReclamacaoTCPServer extends TCPServer {
 
     public void init() throws IOException {
         ReclamacoesImpl reclamacoes = new ReclamacoesImpl();
-        reclamacoes.init();
+        reclamacoes.init(KindOfTransport.TCP);
         serviceHandler = new ServiceHandler<>(reclamacoes, IReclamacoes.class);
         this.start();
 
