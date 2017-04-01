@@ -1,10 +1,10 @@
-package client;
+package client.tcp;
 
 import reclamacoes.IReclamacoes;
 import reclamacoes.ReclamacoesImpl;
 import rpc.ServiceHandler;
 import server.TCPServer;
-import worker.AbstractSocketWorker;
+import worker.tcp.AbstractTCPWorker;
 import worker.RPCWorker;
 
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class ReclamacaoTCPServer extends TCPServer {
 
     }
     @Override
-    public AbstractSocketWorker buildWorker(Socket socket) throws Exception {
+    public AbstractTCPWorker buildWorker(Socket socket) throws Exception {
         return new RPCWorker<>(socket, serviceHandler);
     }
 

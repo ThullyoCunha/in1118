@@ -1,4 +1,4 @@
-package client;
+package client.udp;
 
 import reclamacoes.IReclamacoes;
 import reclamacoes.Reclamacao;

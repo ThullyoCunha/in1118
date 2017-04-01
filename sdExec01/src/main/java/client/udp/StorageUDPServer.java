@@ -1,11 +1,10 @@
-package client;
+package client.udp;
 
 import rpc.ServiceHandler;
-import server.TCPServer;
 import server.UDPServer;
 import storageservice.LocalStorageServiceImpl;
 import storageservice.StorageService;
-import worker.AbstractUDPWorker;
+import worker.udp.AbstractUDPWorker;
 import worker.RPCUDPWorker;
 
 import java.net.DatagramSocket;

@@ -1,17 +1,14 @@
-package client;
+package client.udp;
 
 import reclamacoes.IReclamacoes;
 import reclamacoes.ReclamacoesImpl;
 import rpc.ServiceHandler;
 import server.UDPServer;
-import worker.AbstractSocketWorker;
-import worker.AbstractUDPWorker;
+import worker.udp.AbstractUDPWorker;
 import worker.RPCUDPWorker;
-import worker.RPCWorker;
 
 import java.io.IOException;
 import java.net.DatagramSocket;
-import java.net.Socket;
 
 /**
  * Created by tjamir on 30/03/17.

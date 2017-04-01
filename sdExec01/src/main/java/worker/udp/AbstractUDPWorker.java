@@ -1,4 +1,6 @@
-package worker;
+package worker.udp;
+
+import worker.AbstractWoker;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

@@ -4,7 +4,7 @@
  */
 package server;
 
-        import worker.AbstractUDPWorker;
+        import worker.udp.AbstractUDPWorker;
 
         import java.io.*;
         import java.net.*;

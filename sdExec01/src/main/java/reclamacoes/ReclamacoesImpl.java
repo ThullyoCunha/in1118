@@ -1,7 +1,6 @@
 package reclamacoes;
 
-import client.ReclamacaoClient;
-import client.StorageClient;
+import client.tcp.StorageClient;
 import storageservice.ConsistencyException;
 import storageservice.StorageService;
 import storageservice.ValueObject;

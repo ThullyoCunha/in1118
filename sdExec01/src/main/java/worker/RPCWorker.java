@@ -3,6 +3,7 @@ package worker;
 import rpc.Call;
 import rpc.CallResult;
 import rpc.ServiceHandler;
+import worker.tcp.AbstractTCPWorker;
 
 import java.io.*;
 import java.net.Socket;
@@ -10,7 +11,7 @@ import java.net.Socket;
 /**
  * Created by tjamir on 30/03/17.
  */
-public class RPCWorker<T> extends AbstractSocketWorker {
+public class RPCWorker<T> extends AbstractTCPWorker {
 
 
 

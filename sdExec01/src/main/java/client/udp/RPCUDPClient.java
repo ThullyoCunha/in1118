@@ -1,4 +1,4 @@
-package client;
+package client.udp;
 
 import rpc.Call;
 import rpc.CallInvoker;
@@ -9,11 +9,10 @@ import java.io.*;
 /**
  * Created by tjamir on 30/03/17.
  */
-public class RPCTCPClient extends TCPClient implements CallInvoker{
+public class RPCUDPClient extends UDPClient implements CallInvoker {
 
-
-    public RPCTCPClient(int port, String ip) {
-        super(port, ip);
+    public RPCUDPClient(int port, String ip) {
+        super(ip, port);
     }
 
     @Override
@@ -21,7 +20,7 @@ public class RPCTCPClient extends TCPClient implements CallInvoker{
         try {
             return deserialize(sendMessage(serialize(call)));
         } catch (Exception e) {
-           throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -41,9 +40,4 @@ public class RPCTCPClient extends TCPClient implements CallInvoker{
         }
 
     }
-
-
-
-
-
 }

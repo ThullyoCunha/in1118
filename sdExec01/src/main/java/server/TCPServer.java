@@ -1,6 +1,6 @@
 package server;
 
-import worker.AbstractSocketWorker;
+import worker.tcp.AbstractTCPWorker;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -88,13 +88,13 @@ public abstract class TCPServer implements Runnable {
 
 	private void handleRequest(Socket socket) throws Exception {
 
-		AbstractSocketWorker worker=buildWorker(socket);
+		AbstractTCPWorker worker=buildWorker(socket);
 		worker.start();
 
 	}
 
 
-	public abstract AbstractSocketWorker buildWorker(Socket socket) throws Exception;
+	public abstract AbstractTCPWorker buildWorker(Socket socket) throws Exception;
 
 
 }

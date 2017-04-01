@@ -1,10 +1,10 @@
-package client;
+package client.tcp;
 
 import rpc.ServiceHandler;
 import server.TCPServer;
 import storageservice.LocalStorageServiceImpl;
 import storageservice.StorageService;
-import worker.AbstractSocketWorker;
+import worker.tcp.AbstractTCPWorker;
 import worker.RPCWorker;
 
 import java.net.Socket;
@@ -26,7 +26,7 @@ public class StorageTCPServer extends TCPServer {
 
     }
     @Override
-    public AbstractSocketWorker buildWorker(Socket socket) throws Exception {
+    public AbstractTCPWorker buildWorker(Socket socket) throws Exception {
         return new RPCWorker<>(socket, serviceHandler);
     }
 

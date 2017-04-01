@@ -1,4 +1,6 @@
-package worker;
+package worker.tcp;
+
+import worker.AbstractWoker;
 
 import java.io.*;
 import java.net.Socket;
@@ -6,7 +8,7 @@ import java.net.Socket;
 /**
  * Created by tjamir on 30/03/17.
  */
-public abstract class AbstractSocketWorker extends AbstractWoker implements Runnable{
+public abstract class AbstractTCPWorker extends AbstractWoker implements Runnable{
 
     private Socket socket;
     private DataInputStream in;
@@ -16,7 +18,7 @@ public abstract class AbstractSocketWorker extends AbstractWoker implements Runn
     private Thread thread;
 
 
-    public AbstractSocketWorker(Socket socket) throws Exception {
+    public AbstractTCPWorker(Socket socket) throws Exception {
         this.socket = socket;
         this.initialized = false;
         this.running = false;

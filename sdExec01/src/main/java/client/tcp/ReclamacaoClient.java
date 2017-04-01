@@ -1,4 +1,4 @@
-package client;
+package client.tcp;
 
 import reclamacoes.IReclamacoes;
 import reclamacoes.Reclamacao;

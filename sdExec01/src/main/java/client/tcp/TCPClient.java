@@ -1,4 +1,4 @@
-package client;
+package client.tcp;
 
 
 import java.io.*;

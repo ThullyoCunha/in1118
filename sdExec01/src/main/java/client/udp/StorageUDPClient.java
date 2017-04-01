@@ -1,4 +1,4 @@
-package client;
+package client.udp;
 
 import rpc.ServiceProxy;
 import storageservice.ConsistencyException;
@@ -10,10 +10,8 @@ import java.io.IOException;
 /**
  * Created by tjamir on 30/03/17.
  */
-public class StorageClient implements StorageService{
+public class StorageUDPClient implements StorageService {
 
-
-    @Override
     public ValueObject storePair(String key, ValueObject value) throws ConsistencyException {
         return service.getService().storePair(key, value);
     }
@@ -26,27 +24,26 @@ public class StorageClient implements StorageService{
     private ServiceProxy<StorageService> service;
 
 
-    private RPCTCPClient rpcClient;
+    private RPCUDPClient rpcClient;
 
     public void init() throws IOException {
-        rpcClient = new RPCTCPClient(9696, "127.0.0.1");
-        rpcClient.init();
+        rpcClient = new RPCUDPClient(9697, "127.0.0.1");
         service = new ServiceProxy<>();
         service.setServiceInterface(StorageService.class);
         service.setCallInvoker(rpcClient);
         service.init();
     }
 
-    public static void main(String[] args) throws IOException, ConsistencyException {
+    public static void main(String[] ags) throws ConsistencyException, IOException {
 
-        StorageClient client=new StorageClient();
+        StorageUDPClient client = new StorageUDPClient();
         client.init();
-        ValueObject vo=new ValueObject();
+         ValueObject vo = new ValueObject();
         vo.setVersion(System.currentTimeMillis());
-        vo.setContent(new byte[1024]);
-        client.storePair("teste", vo);
+        vo.setContent(new byte[256]);
+        client.storePair("teste",vo);
+}
 
-    }
 
 
 }
