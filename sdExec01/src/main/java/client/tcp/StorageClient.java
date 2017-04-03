@@ -44,7 +44,8 @@ public class StorageClient implements StorageService{
         ValueObject vo=new ValueObject();
         vo.setVersion(System.currentTimeMillis());
         vo.setContent(new byte[1024]);
-        client.storePair("teste", vo);
+
+
 
     }
 

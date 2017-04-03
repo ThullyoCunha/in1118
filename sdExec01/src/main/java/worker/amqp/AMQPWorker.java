@@ -14,8 +14,9 @@ public abstract class AMQPWorker extends DefaultConsumer implements AbstractWoke
 	private Channel channel;
 
 	public AMQPWorker(Channel channel) {
+
 		super(channel);
-		// TODO Auto-generated constructor stub
+		this.channel = channel;
 	}
 	
 	@Override
@@ -31,10 +32,13 @@ public abstract class AMQPWorker extends DefaultConsumer implements AbstractWoke
 				
 				channel.basicPublish( "", properties.getReplyTo(), replyProps, response);
 				
-		        channel.basicAck(envelope.getDeliveryTag(), false);
-			} catch (ClassNotFoundException e) {
+
+			} catch (Throwable e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				throw new IOException(e);
+			} finally {
+				channel.basicAck(envelope.getDeliveryTag(), false);
 			}
 	}
 }

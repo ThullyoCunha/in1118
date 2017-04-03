@@ -17,7 +17,6 @@ public class ReclamacoesImpl implements IReclamacoes {
     private StorageService storageService;
 
     public void init(KindOfTransport kindOfTransport) throws IOException {
-        BufferedReader inFromUser=new BufferedReader(new InputStreamReader(System.in));
         StorageService client=new StorageServiceFactory(kindOfTransport).getStorageService();
         storageService=client;
 

@@ -18,7 +18,7 @@ public abstract class AbstractUDPWorker  implements Runnable, AbstractWoker{
         this.socket = socket;
     }
 
-   
+
 
     @Override
     public void run() {

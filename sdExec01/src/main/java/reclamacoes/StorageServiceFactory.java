@@ -1,6 +1,7 @@
 package reclamacoes;
 
 import client.KindOfTransport;
+import client.amqp.StorageAMQPClient;
 import client.tcp.StorageClient;
 import client.udp.StorageUDPClient;
 import storageservice.StorageService;
@@ -45,7 +46,9 @@ public class StorageServiceFactory {
                 storageService= storageUDPClient;
                 break;
             case AMQP:
-                storageService=null;
+                StorageAMQPClient storageAMQPClient= new StorageAMQPClient();
+                storageAMQPClient.init();
+                storageService = storageAMQPClient;
                 break;
         }
         return storageService;

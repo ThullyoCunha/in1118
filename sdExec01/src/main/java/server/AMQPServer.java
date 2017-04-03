@@ -1,42 +1,50 @@
 package server;
 
-import java.net.Socket;
-
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.Consumer;
 
 import worker.amqp.AMQPWorker;
-import worker.tcp.AbstractTCPWorker;
+
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 public abstract class AMQPServer {
 	
-	private static final String RPC_QUEUE_NAME = "rpc_queue";
+	private String rpcQueueName;
+    protected Channel channel;
+    private Connection connection;
 
-    public void runService(String[] argv) {
-        ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
 
-        Connection connection = null;
+    public AMQPServer(String rpcQueueName) {
+        this.rpcQueueName = rpcQueueName;
+    }
+
+    public void runService() {
+
+
+        connection = null;
         try {
-            connection      = factory.newConnection();
-            Channel channel = connection.createChannel();
 
-            channel.queueDeclare(RPC_QUEUE_NAME, false, false, false, null);
-
-            channel.basicQos(1);
-
-            System.out.println(" [x] Awaiting RPC requests");
-
-          
-
-            channel.basicConsume(RPC_QUEUE_NAME, false, buildWorker());
+            channel.basicConsume(rpcQueueName, false, buildWorker());
 
             //...
         } catch (Exception e){
         	e.printStackTrace();
         }
     }
-    public abstract AMQPWorker buildWorker();    
+    public abstract AMQPWorker buildWorker();
+
+    public void start() throws IOException, TimeoutException {
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("localhost");
+        connection = factory.newConnection();
+        channel = connection.createChannel();
+
+        channel.queueDeclare(rpcQueueName, false, false, false, null);
+
+        channel.basicQos(1);
+
+        new Thread(this::runService).start();
+    }
 }
